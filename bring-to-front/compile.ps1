@@ -1,0 +1,1 @@
+& 'C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe' /in "$PSScriptRoot/bring-to-front.ahk" /out "$PSScriptRoot/bring-to-front.exe"
