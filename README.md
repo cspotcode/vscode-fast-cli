@@ -1,10 +1,13 @@
 # vscode-fast-cli
 
+*For Windows only*
+
 Launching VSCode as a text editor is slow on Windows, but it doesn't need to be.  When you `git commit` and it launches
-your text editor, you want the file to pop up really fast.
+Code as your editor, you want the commit file to appear instantly.
 
 This extension implements an `fcode` CLI command that opens workspace files in pre-existing VSCode windows faster than
-the default CLI.  It only supports the `--wait` and `--goto` flags.
+the default CLI.  It only supports the `--wait` and `--goto` flags.  For everything else you can use Code's built-in
+CLI.
 
 ## Installation
 
