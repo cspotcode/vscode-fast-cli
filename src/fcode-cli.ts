@@ -21,6 +21,9 @@ async function main() {
     let column = 1;
     for(const arg of process.argv.slice(2)) {
         switch(arg) {
+            case '--fcode-debug':
+                debug.setEnabled(true);
+                break;
             case '-w':
             case '--wait':
                 wait = true;
@@ -85,7 +88,7 @@ async function main() {
                 column
             });
             // Bring file to the front
-            spawn(Path.join(__dirname, '../bring-to-front/bring-to-front.exe'), [`ahk_exe Code.exe`, `- ${ escapeRegExp(foundTargetEditor.windowTitle) } - Visual Studio Code$`]);
+            spawn(Path.join(__dirname, '../bring-to-front/bring-to-front.exe'), [`- ${ escapeRegExp(foundTargetEditor.windowTitle) } - Visual Studio Code$`]);
             if(wait) {
                 const responseMessageExample: ClosedResponse = {
                     type: 'closedResponse',

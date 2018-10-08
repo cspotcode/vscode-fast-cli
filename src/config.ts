@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
-export const configPrefix = 'faster-editor-launcher';
+export const configPrefix = 'vscode-fast-cli';
 export interface Config {
     // ipcPath: string;
+    log: boolean;
 }
 export class ConfigAccessor {
     constructor(public defaults: Config) {}

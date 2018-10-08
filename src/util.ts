@@ -1,3 +1,4 @@
+import * as __vscode from 'vscode';
 import * as fs from "fs";
 import * as Path from 'path';
 import * as os from 'os';
@@ -8,14 +9,34 @@ import {promisify} from 'util';
 export const ipcPath = Path.join(os.homedir(), '.vscode-fast-cli');
 
 export function debug(...args: any[]) {
-    if(debug.enabled)
-        console.log(...args);
+    if(debug._enabled)
+        if(outputChannel)
+            outputChannel.appendLine(args.join(' '));
+        else
+            console.log(...args);
 }
 debug.error = function(...args: any[]) {
-    if(debug.enabled)
-        console.error(...args);
+    if(debug._enabled)
+        if(outputChannel)
+            outputChannel.appendLine('ERR: ' + args.join(' '));
+        else
+            console.error(...args);
 }
-debug.enabled = false;
+debug._isVscode = false;
+debug._enabled = false;
+debug.setEnabled = function(enabled: boolean) {
+    debug._enabled = enabled;
+    if(enabled) {
+        if(debug._isVscode) {
+            console.log('enabling vscode logging to output channel');
+            const vscode = require('vscode') as typeof __vscode;
+            outputChannel = vscode.window.createOutputChannel(require('../package.json').name);
+        } else {
+            console.log('is not vscode; logging to stdout');
+        }
+    }
+}
+let outputChannel: __vscode.OutputChannel | null = null;
 
 
 /**

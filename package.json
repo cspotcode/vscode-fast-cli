@@ -7,6 +7,15 @@
     "os": [
         "win32"
     ],
+    "author": {
+        "name": "Andrew Bradley",
+        "url": "https://cspotcode.com"
+    },
+    "bugs": {
+        "url": "https://github.com/cspotcode/vscode-fast-cli/issues"
+    },
+    "homepage": "https://github.com/cspotcode/vscode-fast-cli",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/cspotcode/vscode-fast-cli.git"
@@ -22,12 +31,17 @@
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Hello World"
+        "configuration": {
+            "type": "object",
+            "title": "VSCode Fast CLI configuration",
+            "properties": {
+                "vscode-fast-cli.log": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Log diagnostic information to an output channel."
+                }
             }
-        ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",

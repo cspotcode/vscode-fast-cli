@@ -5,15 +5,17 @@ import { readJsonGraceful, ipcPath, writeIpcFileSync, isPathIpcType, disposable,
 import * as fs from 'fs';
 import { uuidv4 } from './uuid';
 import { EditRequest } from './ipc';
+import { ConfigAccessor } from './config';
 
-// let config: ConfigAccessor;
+let config: ConfigAccessor;
 
 export function activate(context: vscode.ExtensionContext) {
-    // config = new ConfigAccessor({
-    //     ipcPath
-    // });
+    config = new ConfigAccessor({
+        log: false
+    });
 
-    debug.enabled = true;
+    debug._isVscode = true;
+    debug.setEnabled(config.get('log'));
     debug(`"vscode-fast-cli" is active. pid = ${ process.pid }`);
 
     // create the IPC directory if it doesn't exist
@@ -61,7 +63,7 @@ export function activate(context: vscode.ExtensionContext) {
         if(req.editorUuid === editorUuid) {
             debug('This request is for us');
             const doc = await vscode.workspace.openTextDocument(vscode.Uri.file(req.path));
-            const cursorPosition = new vscode.Position(req.line, req.column);
+            const cursorPosition = new vscode.Position(req.line - 1, req.column - 1);
             const editor = await vscode.window.showTextDocument(doc, {
                 selection: new vscode.Range(cursorPosition, cursorPosition)
             });
