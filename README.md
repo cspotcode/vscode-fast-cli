@@ -16,6 +16,12 @@ npm install vscode-fast-cli
 
 This puts the `fcode` command in your PATH.
 
+Open a file in VSCode like so:
+
+```
+fcode --wait ./path/to/file
+```
+
 <!--
 ## Features
 
