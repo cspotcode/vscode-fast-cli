@@ -17,7 +17,7 @@ loop % winIds
     }
 }
 
-; bring-to-front.ahk - vscode-faster-editor-launch - Visual Studio Code
+; bring-to-front.ahk - vscode-fast-cli - Visual Studio Code
 ; ahk_class Chrome_WidgetWin_1
 ; ahk_exe Code.exe
 

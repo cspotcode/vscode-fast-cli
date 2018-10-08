@@ -1,27 +1,23 @@
 'use strict';
 import * as vscode from 'vscode';
 import * as Path from 'path';
-import { readJsonGraceful, ipcPath, writeIpcFileSync, isPathIpcType, disposable, writeIpcFile } from './util';
+import { readJsonGraceful, ipcPath, writeIpcFileSync, isPathIpcType, disposable, writeIpcFile, debug } from './util';
 import * as fs from 'fs';
 import { uuidv4 } from './uuid';
 import { EditRequest } from './ipc';
-import { ConfigAccessor } from './config';
 
-function debug(...args: any[]) {
-    console.log(...args);
-}
-
-let config: ConfigAccessor;
+// let config: ConfigAccessor;
 
 export function activate(context: vscode.ExtensionContext) {
-    debug(`"vscode-faster-editor-launch" is active. pid = ${ process.pid }`);
+    // config = new ConfigAccessor({
+    //     ipcPath
+    // });
 
-    // TODO create the IPC directory
+    debug.enabled = true;
+    debug(`"vscode-fast-cli" is active. pid = ${ process.pid }`);
+
+    // create the IPC directory if it doesn't exist
     try {fs.mkdirSync(ipcPath);} catch(e) {}
-
-    config = new ConfigAccessor({
-        ipcPath
-    });
 
     const editorUuid = uuidv4();
     
@@ -52,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
         const absPath = Path.join(ipcPath, path);
         if(isPathIpcType('editRequest', absPath)) {
             fileCreated(absPath).catch(e => {
-                console.error(e);
+                debug.error(e);
             });
         }
     });

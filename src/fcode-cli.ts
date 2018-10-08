@@ -2,7 +2,7 @@
 import * as Path from 'path';
 import * as fs from 'fs';
 import * as process from 'process';
-import { readJsonGraceful, readdirAbs, ipcPath, isPathIpcType, findMapAsync, writeIpcFileSync, ipcFileAbs, isFileInDirectory } from './util';
+import { readJsonGraceful, readdirAbs, ipcPath, isPathIpcType, findMapAsync, writeIpcFileSync, ipcFileAbs, isFileInDirectory, debug } from './util';
 import { VscodeEditorPid, ClosedResponse } from './ipc';
 import { uuidv4 } from './uuid';
 import { spawn } from 'child_process';
@@ -12,11 +12,6 @@ import * as __crossSpawn from 'cross-spawn';
 function getCrossSpawn() {
     return require('cross-spawn') as typeof __crossSpawn;
 }
-
-// function debug(...args: any[]) {
-//     console.log(...args);
-// }
-function debug(...args: any[]) {}
 
 async function main() {
     let fileToEdit = null;

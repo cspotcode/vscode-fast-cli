@@ -1,7 +1,22 @@
-# vscode-faster-editor-launch README
+# vscode-fast-cli
 
-This is the README for your extension "vscode-faster-editor-launch". After writing up a brief description, we recommend including the following sections.
+Launching VSCode as a text editor is slow on Windows, but it doesn't need to be.  When you `git commit` and it launches
+your text editor, you want the file to pop up really fast.
 
+This extension implements an `fcode` CLI command that opens workspace files in pre-existing VSCode windows faster than
+the default CLI.  It only supports the `--wait` and `--goto` flags.
+
+## Installation
+
+Install the companion CLI command from npm:
+
+```
+npm install vscode-fast-cli
+```
+
+This puts the `fcode` command in your PATH.
+
+<!--
 ## Features
 
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
@@ -63,3 +78,4 @@ Added features X, Y, and Z.
 * [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
+-->

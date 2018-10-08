@@ -5,7 +5,18 @@ import { IpcType, IpcFile } from "./ipc";
 import {Disposable} from 'vscode';
 import {promisify} from 'util';
 
-export const ipcPath = Path.join(os.homedir(), '.vscode-faster-editor-launch');
+export const ipcPath = Path.join(os.homedir(), '.vscode-fast-cli');
+
+export function debug(...args: any[]) {
+    if(debug.enabled)
+        console.log(...args);
+}
+debug.error = function(...args: any[]) {
+    if(debug.enabled)
+        console.error(...args);
+}
+debug.enabled = false;
+
 
 /**
  * Read a JSON file from disc, retrying for a bit with falloff
@@ -18,7 +29,7 @@ export async function readJsonGraceful<T>(path: string): Promise<T> {
     const timeout = 3e3;
     while(true) {
         try {
-            console.log(path);
+            debug(path);
             return JSON.parse(await promisify(fs.readFile)(path, 'utf8'));
         } catch(e) {
             if(start + timeout > +new Date) throw new Error('unable to read JSON from file');
